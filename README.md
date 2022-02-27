@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# React Alkemy Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Hotel Menu App
 
-## Available Scripts
+Application to create a restaurant hotel menu that will show different attributes at item level and also at menu level.
 
-In the project directory, you can run:
+## Live demo
 
-### `npm start`
+[Link to the site!](https://la-cuisine-de-ma-grand-mere.netlify.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Use cases
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Login Form
 
-### `npm test`
+The form should be rendered on any route if the user is not authenticated
+Form fields:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- E-mail.
+- Password.
+- "Log in" button.
 
-### `npm run build`
+When submitting, there will be a non empty validation in both fields. If succeeded, a POST request must be made with the email and password fields in the BODY.
+The valid data to get a token are:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Email: challenge@alkemy.org
+- Password: react
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Some kind of feedback should be shown to the user while the request is being processed, not allowing it to press the login button again until it receives a response.
+In the case of getting an API error, an alert should be displayed (using sweet alert).
+If succeeded, it should redirect to Home and store the obtained token in localStorage.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Menu Items
 
-### `npm run eject`
+The Home page will show the menu items in a list. Each item (which must be a separate component) will contain:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Name of the dish.
+- Image.
+- Characteristics of the plate.
+- Actions to see more details or remove it from the menu.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Recipes Finder
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To add a menu item to the menu, a form must be displayed that makes a GET request to the search endpoint and display the available results in a grid, using the item component from the previous point.
+The form should search only if there are more than 2 characters in the filter. Validation must be done using the Formik library.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. Recipe Detail
 
-## Learn More
+Clicking on a menu item will display the details of the recipe.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. Navigation between sections
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The different pages must be protected against unauthorized users by verifying that the current user has a token stored in localStorage. For route management, ReactRouterDom should be used.
 
-### Code Splitting
+## Required to run the app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Node.js v16.14.0
+- NPM v8.3.1
+- Axios v0.26.0
+- Bootstrap v5.1.3
+- Formik v2.2.9
+- Html-react-parser v1.4.8
+- React v17.0.2
+- React-redux v7.2.6
+- React-router-dom v6.2.1
+- Redux v4.1.2
+- Redux-thunk v2.4.1
+- Sweetalert v2.1.2
+- Yup 0.32.11
 
-### Analyzing the Bundle Size
+## How to run the App manually
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Go to the project root directory, and in the terminal run...
 
-### Making a Progressive Web App
+### `npm install`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `npm start` - runs the server on http://localhost:3000

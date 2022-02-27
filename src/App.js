@@ -1,23 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./pages/Home";
+import MenuItemSearch from "./pages/MenuItemSearch";
+import Login from "./pages/Login";
+import Navbar from "./components/routes/Navbar";
+import MenuItemDetails from "./pages/MenuItemDetails";
+import AuthProvider from "./components/auth/AuthProvider";
+import ProtectedRoute from "./components/routes/ProtectedRoute";
+import NotFound from "./pages/NotFound";
+
+/* Router */
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App pt-5">
+      <BrowserRouter>
+        <AuthProvider>
+          <Navbar />
+          <div className="container-md pt-4">
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/login" element={<Login />} />
+
+              {/* Protected Routes */}
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/menu-items"
+                element={
+                  <ProtectedRoute>
+                    <MenuItemSearch />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/menu-items/:id"
+                element={
+                  <ProtectedRoute>
+                    <MenuItemDetails />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Not Found */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </AuthProvider>
+      </BrowserRouter>
     </div>
   );
 }
